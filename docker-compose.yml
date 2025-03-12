@@ -1,0 +1,68 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    restart: always
+    networks:
+      - parkingManagementSystemNetwork
+    environment:
+      POSTGRES_DB: ParkingAreaManagementSystem
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1456325
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+  api:
+    build:
+      context: .
+      dockerfile: ./ParkingAreaManagementSystemApi/Api.Dockerfile
+    container_name: parking_management_system_api_service
+    networks:
+      - parkingManagementSystemNetwork
+    environment:
+      - ASPNETCORE_ENVIRONMENT=DockerCompose
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+  ui:
+    build:
+      context: .
+      dockerfile: ./ParkingAreaManagementSystemUi/Ui.Dockerfile
+    container_name: parking_management_system_ui_service
+    networks:
+      - parkingManagementSystemNetwork
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - api
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+volumes:
+  postgres_data:
+
+networks:
+  parkingManagementSystemNetwork:
+    driver: bridge

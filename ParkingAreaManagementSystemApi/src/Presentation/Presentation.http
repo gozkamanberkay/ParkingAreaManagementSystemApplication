@@ -1,0 +1,49 @@
+@Presentation_HostAddress = http://localhost:5278
+
+### Register
+POST {{Presentation_HostAddress}}/api/Auth/Register
+Content-Type: application/json
+
+{
+  "email": "user@user.com",
+  "password": "User123."
+}
+
+### Login
+POST {{Presentation_HostAddress}}/api/Auth/Login
+Content-Type: application/json
+
+{
+  "email": "admin",
+  "password": "password"
+}
+
+### Refresh Token
+GET {{Presentation_HostAddress}}/api/Auth/RefreshToken?refreshToken=1dee4960-3ced-4e21-8edb-5228aab1f94f
+Accept: application/json
+
+### CheckIn
+POST {{Presentation_HostAddress}}/api/Dashboard/CheckIn
+Content-Type: application/json
+
+{
+  "plateNumber": "46 TEST",
+  "allowedVehicleSize": 5
+}
+
+### CheckOut
+POST {{Presentation_HostAddress}}/api/Dashboard/CheckOut
+Content-Type: application/json
+
+{
+  "plateNumber": "44 TEST"
+}
+
+### GetAllParkingZones
+GET {{Presentation_HostAddress}}/api/Dashboard/GetAllParkingZones/
+Accept: application/json
+
+### GetAllParkingZonesWithAuthorize
+GET {{Presentation_HostAddress}}/api/Dashboard/GetAllParkingZonesWithAuthorize/
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImp0aSI6IjUzZjVhMzM0LWFiOWEtNDQzMi04NTFkLWMwZDRjNWM1NWUxYyIsIm5iZiI6MTc0MTY4ODgzNSwiZXhwIjoxNzQxNjkwNjM1LCJpc3MiOiJteWRvbWFpbi5jb20iLCJhdWQiOiJteWRvbWFpbi5jb20ifQ.cSgseKUGLhRz2XfwKtI1qfmi07c9UYMQm8Mp3E_SVok

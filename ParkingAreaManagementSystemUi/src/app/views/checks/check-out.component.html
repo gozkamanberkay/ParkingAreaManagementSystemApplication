@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center align-items-center">
+  <c-card class="mb-4 col-8">
+    <c-card-header> Check Out </c-card-header>
+    <c-card-body class="d-grid gap-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Plate Number"
+        [(ngModel)]="plateNumberToCheckOut"
+      />
+
+      <button
+        (click)="checkOut()"
+        class="btn btn-primary"
+        type="button"
+        [disabled]="this.visible"
+      >
+        Check Out
+      </button>
+
+      <c-alert *ngIf="alertVisible" color="danger"
+        >The transaction was not completed</c-alert
+      >
+    </c-card-body>
+  </c-card>
+</div>
+
+<c-modal
+  id="liveDemoModal"
+  [visible]="visible"
+  (visibleChange)="handleVisibleChange($event)"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Check Out Summary</h5>
+    <button (click)="changeVisible()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <ul cListGroup *ngIf="checkOutSummary">
+      <li cListGroupItem>
+        Checked In At:
+        {{ checkOutSummary.checkedInAt | date : "yyyy-MM-dd HH:mm:ss" : "UTC" }}
+      </li>
+      <li cListGroupItem>
+        Check Out At:
+        {{
+          checkOutSummary.checkedOutAt | date : "yyyy-MM-dd HH:mm:ss" : "UTC"
+        }}
+      </li>
+      <li cListGroupItem>
+        Park Duration In Hours:
+        {{ checkOutSummary.parkDurationInHours | number : "1.1-2" }}
+      </li>
+      <li cListGroupItem>
+        Park Zone Hourly Fee: {{ checkOutSummary.hourlyFee | currency : "TRY" }}
+      </li>
+      <li cListGroupItem>
+        Total Fee: {{ checkOutSummary.totalFee | currency : "TRY" }}
+      </li>
+    </ul>
+  </c-modal-body>
+</c-modal>

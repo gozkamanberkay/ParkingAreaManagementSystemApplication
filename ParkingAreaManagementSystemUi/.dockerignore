@@ -1,0 +1,25 @@
+# Node.js ve npm tarafından oluşturulan klasörler
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# NPM cache (önceden yüklenen bağımlılıklar için)
+.npm/
+
+# Derleme veya build dosyaları
+/dist/
+*.log
+
+# Docker için belirli dosyalar
+Dockerfile
+.dockerignore
+
+# IDE'ler ve editörler tarafından oluşturulan dosyalar
+.vscode/
+.idea/
+
+# Diğer geçici dosyalar
+*.tmp
+*.bak
+*.swp

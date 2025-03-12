@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center">
+  <c-card class="mb-4 col-8">
+    <c-card-header> Check In </c-card-header>
+    <c-card-body class="d-grid gap-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Plate Number"
+        [(ngModel)]="plateNumberToCheckIn"
+      />
+
+      <select class="form-select" [(ngModel)]="vehicleSizeToCheckIn">
+        <option [value]="5">Small</option>
+        <option [value]="10">Medium</option>
+        <option [value]="15">Big</option>
+      </select>
+
+      <button (click)="checkIn()" class="btn btn-primary" type="button">
+        Check In
+      </button>
+
+      <c-alert
+        *ngIf="alertVisible"
+        [color]="requestIsSuccess ? 'success' : 'danger'"
+      >
+        {{ responseMessage }}</c-alert
+      >
+    </c-card-body>
+  </c-card>
+</div>
